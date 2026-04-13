@@ -25,9 +25,7 @@ dependencies {
         intellijIdea(providers.gradleProperty("platformVersion"))
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 
-        // Add plugin dependencies for compilation here, for example:
-        // bundledPlugin("com.intellij.java")
-
+        bundledPlugin("Git4Idea")
     }
 }
 

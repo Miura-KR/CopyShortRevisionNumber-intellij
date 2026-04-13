@@ -1,33 +1,42 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.k.pmpstudy.CopyAbbreviatedGitRevision</id>
 
-    <!-- Public plugin name should be written in Title Case.
-     Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
     <name>CopyAbbreviatedGitRevision</name>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor url="https://www.yourcompany.com">CopyAbbreviatedGitRevision</vendor>
 
-    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
     <description><![CDATA[
-        Enter short description for your plugin here.<br>
-        <em>most HTML tags may be used</em>
+        Adds a context menu action to the Git Log view that copies the abbreviated
+        revision hash of the selected commit(s). The abbreviation style is configurable:
+        <ul>
+          <li>Unique shortest (<code>git rev-parse --short</code>) &mdash; default</li>
+          <li>Fixed length (user-specified length)</li>
+        </ul>
         ]]></description>
 
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
 
-    <resource-bundle>messages.MyMessageBundle</resource-bundle>
-
-    <!-- Extensions defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="MyToolWindow" factoryClass="com.k.pmpstudy.MyToolWindowFactory"
-                    icon="AllIcons.Toolwindows.ToolWindowPalette"/>
+        <applicationService
+                serviceImplementation="com.k.pmpstudy.CopyAbbreviatedGitRevisionSettings"/>
+        <applicationConfigurable
+                parentId="tools"
+                id="com.k.pmpstudy.CopyAbbreviatedGitRevisionConfigurable"
+                displayName="Copy Abbreviated Git Revision"
+                instance="com.k.pmpstudy.CopyAbbreviatedGitRevisionConfigurable"/>
     </extensions>
+
+    <actions>
+        <action id="com.k.pmpstudy.CopyAbbreviatedGitRevisionAction"
+                class="com.k.pmpstudy.CopyAbbreviatedGitRevisionAction"
+                text="Copy Abbreviated Revision Number"
+                description="Copy abbreviated Git revision hash of the selected commit(s)">
+            <add-to-group group-id="Vcs.Log.ContextMenu"
+                          anchor="after"
+                          relative-to-action="Vcs.CopyRevisionNumberAction"/>
+        </action>
+    </actions>
 
 </idea-plugin>
