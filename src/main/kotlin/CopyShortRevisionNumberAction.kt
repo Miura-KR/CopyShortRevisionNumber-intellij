@@ -16,7 +16,7 @@ import git4idea.commands.GitCommand
 import git4idea.commands.GitLineHandler
 import java.awt.datatransfer.StringSelection
 
-class CopyAbbreviatedGitRevisionAction : AnAction() {
+class CopyShortRevisionNumberAction : AnAction() {
 
     override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 
@@ -33,12 +33,12 @@ class CopyAbbreviatedGitRevisionAction : AnAction() {
         val commits = selection.commits.toList()
         if (commits.isEmpty()) return
 
-        val settings = CopyAbbreviatedGitRevisionSettings.getInstance().state
+        val settings = CopyShortRevisionNumberSettings.getInstance().state
         val mode = settings.mode
         val fixedLength = settings.fixedLength
 
         ProgressManager.getInstance().run(
-            object : Task.Backgroundable(project, "Copying abbreviated Git revision", true) {
+            object : Task.Backgroundable(project, "Copying short revision number", true) {
                 override fun run(indicator: ProgressIndicator) {
                     val result = commits.map { commit ->
                         abbreviate(project, commit.root, commit.hash.asString(), mode, fixedLength)
@@ -54,10 +54,10 @@ class CopyAbbreviatedGitRevisionAction : AnAction() {
         project: Project,
         root: VirtualFile,
         fullHash: String,
-        mode: CopyAbbreviatedGitRevisionSettings.Mode,
+        mode: CopyShortRevisionNumberSettings.Mode,
         fixedLength: Int
     ): String = when (mode) {
-        CopyAbbreviatedGitRevisionSettings.Mode.UNIQUE_SHORTEST -> {
+        CopyShortRevisionNumberSettings.Mode.UNIQUE_SHORTEST -> {
             val handler = GitLineHandler(project, root, GitCommand.REV_PARSE)
             handler.addParameters("--short", fullHash)
             handler.setSilent(true)
@@ -68,7 +68,7 @@ class CopyAbbreviatedGitRevisionAction : AnAction() {
                 fullHash.take(7)
             }
         }
-        CopyAbbreviatedGitRevisionSettings.Mode.FIXED_LENGTH -> {
+        CopyShortRevisionNumberSettings.Mode.FIXED_LENGTH -> {
             fullHash.take(fixedLength.coerceIn(1, fullHash.length))
         }
     }

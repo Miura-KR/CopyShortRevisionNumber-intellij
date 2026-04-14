@@ -8,11 +8,11 @@ import com.intellij.openapi.components.Storage
 
 @Service(Service.Level.APP)
 @State(
-    name = "CopyAbbreviatedGitRevisionSettings",
-    storages = [Storage("copyAbbreviatedGitRevision.xml")]
+    name = "CopyShortRevisionNumberSettings",
+    storages = [Storage("copyShortRevisionNumber.xml")]
 )
-class CopyAbbreviatedGitRevisionSettings :
-    PersistentStateComponent<CopyAbbreviatedGitRevisionSettings.State> {
+class CopyShortRevisionNumberSettings :
+    PersistentStateComponent<CopyShortRevisionNumberSettings.State> {
 
     enum class Mode { UNIQUE_SHORTEST, FIXED_LENGTH }
 
@@ -30,8 +30,8 @@ class CopyAbbreviatedGitRevisionSettings :
     }
 
     companion object {
-        fun getInstance(): CopyAbbreviatedGitRevisionSettings =
+        fun getInstance(): CopyShortRevisionNumberSettings =
             ApplicationManager.getApplication()
-                .getService(CopyAbbreviatedGitRevisionSettings::class.java)
+                .getService(CopyShortRevisionNumberSettings::class.java)
     }
 }

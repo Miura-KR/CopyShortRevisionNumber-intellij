@@ -7,16 +7,16 @@ import com.intellij.ui.dsl.builder.bindIntText
 import com.intellij.ui.dsl.builder.panel
 import javax.swing.JComponent
 
-class CopyAbbreviatedGitRevisionConfigurable : Configurable {
+class CopyShortRevisionNumberConfigurable : Configurable {
 
-    private val settings get() = CopyAbbreviatedGitRevisionSettings.getInstance().state
+    private val settings get() = CopyShortRevisionNumberSettings.getInstance().state
 
-    private var uiMode: CopyAbbreviatedGitRevisionSettings.Mode = settings.mode
+    private var uiMode: CopyShortRevisionNumberSettings.Mode = settings.mode
     private var uiFixedLength: Int = settings.fixedLength
 
     private var myPanel: DialogPanel? = null
 
-    override fun getDisplayName(): String = "Copy Abbreviated Git Revision"
+    override fun getDisplayName(): String = "Copy Short Revision Number"
 
     override fun createComponent(): JComponent {
         uiMode = settings.mode
@@ -27,13 +27,13 @@ class CopyAbbreviatedGitRevisionConfigurable : Configurable {
                 row {
                     radioButton(
                         "Unique shortest (git rev-parse --short)",
-                        CopyAbbreviatedGitRevisionSettings.Mode.UNIQUE_SHORTEST
+                        CopyShortRevisionNumberSettings.Mode.UNIQUE_SHORTEST
                     )
                 }
                 row {
                     radioButton(
                         "Fixed length",
-                        CopyAbbreviatedGitRevisionSettings.Mode.FIXED_LENGTH
+                        CopyShortRevisionNumberSettings.Mode.FIXED_LENGTH
                     )
                 }
             }.bind(::uiMode)

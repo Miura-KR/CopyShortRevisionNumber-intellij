@@ -1,1 +1,1 @@
-rootProject.name = "CopyAbbreviatedGitRevision"
+rootProject.name = "CopyShortRevisionNumber"

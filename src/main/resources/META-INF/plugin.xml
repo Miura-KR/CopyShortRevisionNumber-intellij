@@ -1,18 +1,36 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.k.pmpstudy.CopyAbbreviatedGitRevision</id>
+    <id>com.k.pmpstudy.CopyShortRevisionNumber</id>
 
-    <name>CopyAbbreviatedGitRevision</name>
+    <name>CopyShortRevisionNumber</name>
 
-    <vendor url="https://www.yourcompany.com">CopyAbbreviatedGitRevision</vendor>
+    <vendor url="https://www.yourcompany.com">CopyShortRevisionNumber</vendor>
 
     <description><![CDATA[
-        Adds a context menu action to the Git Log view that copies the abbreviated
-        revision hash of the selected commit(s). The abbreviation style is configurable:
+        <p>
+          Adds a <b>Copy Short Revision Number</b> action to the Git Log context menu.
+          It copies the abbreviated hash of the selected commit(s) to the clipboard, with a
+          configurable abbreviation style.
+        </p>
         <ul>
-          <li>Unique shortest (<code>git rev-parse --short</code>) &mdash; default</li>
-          <li>Fixed length (user-specified length)</li>
+          <li><b>Unique shortest</b> (<code>git rev-parse --short</code>) &mdash; default</li>
+          <li><b>Fixed length</b> &mdash; user-specified length (1&ndash;40 characters)</li>
         </ul>
+        <p>
+          Configure the mode under <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i>.
+        </p>
+
+        <p>
+          Git ログのコンテキストメニューに <b>Copy Short Revision Number</b> アクションを追加します。
+          選択したコミットの省略されたハッシュをクリップボードにコピーし、省略形式を設定できます。
+        </p>
+        <ul>
+          <li><b>Unique shortest</b>（<code>git rev-parse --short</code>）&mdash; デフォルト</li>
+          <li><b>Fixed length</b> &mdash; ユーザー指定の長さ（1〜40 文字）</li>
+        </ul>
+        <p>
+          モードは <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i> から設定できます。
+        </p>
         ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
@@ -20,19 +38,19 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService
-                serviceImplementation="com.k.pmpstudy.CopyAbbreviatedGitRevisionSettings"/>
+                serviceImplementation="com.k.pmpstudy.CopyShortRevisionNumberSettings"/>
         <applicationConfigurable
                 parentId="tools"
-                id="com.k.pmpstudy.CopyAbbreviatedGitRevisionConfigurable"
-                displayName="Copy Abbreviated Git Revision"
-                instance="com.k.pmpstudy.CopyAbbreviatedGitRevisionConfigurable"/>
+                id="com.k.pmpstudy.CopyShortRevisionNumberConfigurable"
+                displayName="Copy Short Revision Number"
+                instance="com.k.pmpstudy.CopyShortRevisionNumberConfigurable"/>
     </extensions>
 
     <actions>
-        <action id="com.k.pmpstudy.CopyAbbreviatedGitRevisionAction"
-                class="com.k.pmpstudy.CopyAbbreviatedGitRevisionAction"
-                text="Copy Abbreviated Revision Number"
-                description="Copy abbreviated Git revision hash of the selected commit(s)">
+        <action id="com.k.pmpstudy.CopyShortRevisionNumberAction"
+                class="com.k.pmpstudy.CopyShortRevisionNumberAction"
+                text="Copy Short Revision Number"
+                description="Copy short Git revision hash of the selected commit(s)">
             <add-to-group group-id="Vcs.Log.ContextMenu"
                           anchor="after"
                           relative-to-action="Vcs.CopyRevisionNumberAction"/>
