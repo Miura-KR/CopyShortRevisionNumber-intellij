@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.k.pmpstudy"
-version = "1.0.0"
+version = "1.0.1"
 
 // Set the JVM language level used to build the project.
 kotlin {
@@ -36,7 +36,7 @@ intellijPlatform {
         }
 
         changeNotes = """
-            Initial version
+            Compatibility update.
         """.trimIndent()
     }
 }
