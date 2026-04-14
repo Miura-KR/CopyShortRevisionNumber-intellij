@@ -39,6 +39,9 @@ intellijPlatform {
             Compatibility update.
         """.trimIndent()
     }
+    publishing {
+        token = providers.gradleProperty("JETBRAIN_TOKEN")
+    }
 }
 
 tasks {

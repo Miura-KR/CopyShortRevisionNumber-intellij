@@ -19,7 +19,7 @@
         <p>
           Configure the mode under <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i>.
         </p>
-
+<br><br>
         <p>
           Git ログのコンテキストメニューに <b>Copy Short Revision Number</b> アクションを追加します。
           選択したコミットの省略されたハッシュをクリップボードにコピーし、省略形式を設定できます。
