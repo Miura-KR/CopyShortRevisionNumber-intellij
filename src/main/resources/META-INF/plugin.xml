@@ -55,6 +55,23 @@
                           anchor="after"
                           relative-to-action="Vcs.CopyRevisionNumberAction"/>
         </action>
+        <action id="com.k.pmpstudy.CopyGitHubCommitLinkAction"
+                class="com.k.pmpstudy.CopyGitHubCommitLinkAction"
+                text="Copy URL(Short Revision Number)"
+                description="Copy GitHub URL of the selected commit using the short revision hash"
+                icon="com.k.pmpstudy.PluginIcons.GitHub">
+            <add-to-group group-id="Vcs.Log.ContextMenu"
+                          anchor="after"
+                          relative-to-action="com.k.pmpstudy.CopyShortRevisionNumberAction"/>
+        </action>
+        <action id="com.k.pmpstudy.CopyGitHubFileLinkAction"
+                class="com.k.pmpstudy.CopyGitHubFileLinkAction"
+                text="GitHub Repository URL(Short Revision)"
+                description="Copy GitHub URL of the selected file at the current commit"
+                icon="com.k.pmpstudy.PluginIcons.GitHub">
+            <add-to-group group-id="CopyReferencePopupGroup" anchor="last"/>
+            <add-to-group group-id="Copy.Paste.Special" anchor="last"/>
+        </action>
     </actions>
 
 </idea-plugin>
