@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.k.pmpstudy"
-version = "1.0.1"
+version = "1.1.0"
 
 // Set the JVM language level used to build the project.
 kotlin {
