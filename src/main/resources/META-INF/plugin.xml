@@ -8,28 +8,50 @@
 
     <description><![CDATA[
         <p>
-          Adds a <b>Copy Short Revision Number</b> action to the Git Log context menu.
-          It copies the abbreviated hash of the selected commit(s) to the clipboard, with a
-          configurable abbreviation style.
+          Adds short-revision and GitHub link copy actions to context menus.
         </p>
+        <ul>
+          <li><b>Copy Short Revision Number</b> &mdash; in the Git Log context menu, copies the
+              abbreviated hash of the selected commit(s).</li>
+          <li><b>Copy URL(Short Revision Number)</b> &mdash; in the Git Log context menu, copies
+              the GitHub commit URL using the short revision hash
+              (<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/commit/&lt;short&gt;</code>).</li>
+          <li><b>GitHub Repository URL(Short Revision)</b> &mdash; in <i>Copy Path/Reference&hellip;</i>
+              and the editor's <i>Copy / Paste Special</i> submenu, copies the GitHub URL of the
+              selected file or directory at the current commit
+              (<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/blob/&lt;short&gt;/&lt;path&gt;</code>).
+              Includes <code>#L&lt;n&gt;</code> / <code>#L&lt;n&gt;-L&lt;m&gt;</code> when invoked from the editor.</li>
+        </ul>
+        <p>Hash abbreviation modes:</p>
         <ul>
           <li><b>Unique shortest</b> (<code>git rev-parse --short</code>) &mdash; default</li>
           <li><b>Fixed length</b> &mdash; user-specified length (1&ndash;40 characters)</li>
         </ul>
         <p>
-          Configure the mode under <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i>.
+          GitHub link actions are hidden when the repository has no <code>github.com</code> remote.
+          Configure the abbreviation mode under <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i>.
         </p>
 <br><br>
         <p>
-          Git ログのコンテキストメニューに <b>Copy Short Revision Number</b> アクションを追加します。
-          選択したコミットの省略されたハッシュをクリップボードにコピーし、省略形式を設定できます。
+          短縮リビジョンと GitHub リンクをコピーするアクションをコンテキストメニューに追加します。
         </p>
+        <ul>
+          <li><b>Copy Short Revision Number</b> &mdash; Git ログメニューから、選択コミットの短縮ハッシュをコピー。</li>
+          <li><b>Copy URL(Short Revision Number)</b> &mdash; Git ログメニューから、短縮ハッシュを使った GitHub コミット URL をコピー
+              （<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/commit/&lt;short&gt;</code>）。</li>
+          <li><b>GitHub Repository URL(Short Revision)</b> &mdash; <i>パス/参照のコピー</i> およびエディタの
+              <i>Copy / Paste Special</i> サブメニューから、選択ファイル/ディレクトリの現在コミットでの GitHub URL をコピー
+              （<code>https://github.com/&lt;owner&gt;/&lt;repo&gt;/blob/&lt;short&gt;/&lt;path&gt;</code>）。
+              エディタから呼んだ場合は <code>#L&lt;n&gt;</code> / <code>#L&lt;n&gt;-L&lt;m&gt;</code> を付与。</li>
+        </ul>
+        <p>ハッシュ短縮モード:</p>
         <ul>
           <li><b>Unique shortest</b>（<code>git rev-parse --short</code>）&mdash; デフォルト</li>
           <li><b>Fixed length</b> &mdash; ユーザー指定の長さ（1〜40 文字）</li>
         </ul>
         <p>
-          モードは <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i> から設定できます。
+          GitHub リンク系アクションは <code>github.com</code> の remote が無い場合は非表示になります。
+          短縮モードは <i>Settings &rarr; Tools &rarr; Copy Short Revision Number</i> から設定できます。
         </p>
         ]]></description>
 
@@ -50,7 +72,8 @@
         <action id="com.k.pmpstudy.CopyShortRevisionNumberAction"
                 class="com.k.pmpstudy.CopyShortRevisionNumberAction"
                 text="Copy Short Revision Number"
-                description="Copy short Git revision hash of the selected commit(s)">
+                description="Copy short Git revision hash of the selected commit(s)"
+                icon="AllIcons.Actions.Copy">
             <add-to-group group-id="Vcs.Log.ContextMenu"
                           anchor="after"
                           relative-to-action="Vcs.CopyRevisionNumberAction"/>

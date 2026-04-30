@@ -12,6 +12,9 @@ import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
+import git4idea.commands.Git
+import git4idea.commands.GitCommand
+import git4idea.commands.GitLineHandler
 import git4idea.repo.GitRepository
 import git4idea.repo.GitRepositoryManager
 import java.awt.datatransfer.StringSelection
@@ -104,11 +107,20 @@ private fun buildFileLink(
     fixedLength: Int
 ): String? {
     val ctx = resolveContext(project, file) ?: return null
-    val fullHash = ctx.repo.currentRevision ?: return null
+    val fullHash = lastCommitHashForPath(project, ctx.repo.root, ctx.relativePath) ?: return null
     val shortHash = abbreviateHash(project, ctx.repo.root, fullHash, mode, fixedLength)
     val kind = if (file.isDirectory) "tree" else "blob"
     val encodedPath = ctx.relativePath.split('/').joinToString("/", transform = ::encodePathSegment)
     return "${ctx.baseUrl}/$kind/$shortHash/$encodedPath$lineSuffix"
+}
+
+private fun lastCommitHashForPath(project: Project, root: VirtualFile, relativePath: String): String? {
+    val handler = GitLineHandler(project, root, GitCommand.LOG)
+    handler.addParameters("-1", "--format=%H", "--", relativePath)
+    handler.setSilent(true)
+    val result = Git.getInstance().runCommand(handler)
+    if (!result.success()) return null
+    return result.output.joinToString("").trim().ifEmpty { null }
 }
 
 private fun encodePathSegment(segment: String): String =
