@@ -10,6 +10,8 @@ import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vcs.FileStatus
+import com.intellij.openapi.vcs.FileStatusManager
 import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import git4idea.commands.Git
@@ -30,10 +32,17 @@ class CopyGitHubFileLinkAction : AnAction() {
         val files = collectFiles(e)
         e.presentation.isEnabledAndVisible = project != null &&
             files.isNotEmpty() &&
-            files.all {
-                val ctx = resolveContext(project, it) ?: return@all false
-                ctx.repo.currentRevision != null
-            }
+            files.all { isEligible(project, it) }
+    }
+
+    private fun isEligible(project: Project, file: VirtualFile): Boolean {
+        val ctx = resolveContext(project, file) ?: return false
+        if (ctx.repo.currentRevision == null) return false
+        if (file.isDirectory) return true
+        val status = FileStatusManager.getInstance(project).getStatus(file)
+        return status != FileStatus.UNKNOWN &&
+            status != FileStatus.IGNORED &&
+            status != FileStatus.ADDED
     }
 
     override fun actionPerformed(e: AnActionEvent) {
