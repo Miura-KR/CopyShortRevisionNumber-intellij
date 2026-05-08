@@ -1,10 +1,8 @@
 # CopyShortRevisionNumber
 
-An IntelliJ Platform plugin that adds short-revision and GitHub link copy actions to context menus. The hash used in every action follows the same configurable abbreviation rule.
-
----
-
 ## English
+
+An IntelliJ Platform plugin that adds short-revision and GitHub link copy actions to context menus. The hash used in every action follows the same configurable abbreviation rule.
 
 ### Features
 
@@ -45,6 +43,8 @@ Open **Settings → Tools → Copy Short Revision Number** and choose:
 ---
 
 ## 日本語
+
+短縮リビジョン番号と GitHub リンクのコピーアクションを各種コンテキストメニューに追加する IntelliJ Platform プラグインです。すべてのアクションで使用されるハッシュは、共通の設定可能な省略ルールに従います。
 
 ### 機能
 

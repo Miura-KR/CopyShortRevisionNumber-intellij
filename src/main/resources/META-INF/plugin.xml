@@ -72,11 +72,18 @@
         <action id="com.k.pmpstudy.CopyShortRevisionNumberAction"
                 class="com.k.pmpstudy.CopyShortRevisionNumberAction"
                 text="Copy Short Revision Number"
-                description="Copy short Git revision hash of the selected commit(s)"
+                description="Copy short Git revision hash of the selected commit"
                 icon="AllIcons.Actions.Copy">
             <add-to-group group-id="Vcs.Log.ContextMenu"
                           anchor="after"
                           relative-to-action="Vcs.CopyRevisionNumberAction"/>
+        </action>
+        <action id="com.k.pmpstudy.CopyShortRefAction"
+                class="com.k.pmpstudy.CopyShortRefAction"
+                text="Copy Short Revision Number"
+                description="Copy short Git revision hash of the selected branch or tag"
+                icon="AllIcons.Actions.Copy">
+            <add-to-group group-id="Git.Branch.Checkout" anchor="last"/>
         </action>
         <action id="com.k.pmpstudy.CopyGitHubCommitLinkAction"
                 class="com.k.pmpstudy.CopyGitHubCommitLinkAction"
